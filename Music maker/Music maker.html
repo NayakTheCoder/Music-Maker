@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .button:hover{
+            cursor: pointer;
+            box-shadow: 5px 5px 20px 20px rgb(202, 198, 198);
+        }
+    #div1{
+        position: absolute;
+        bottom: 0;
+        width: 220px;
+        height: 75px;
+        left: 0.4%;
+        background-color: red;
+    }
+    #div2{
+        position: absolute;
+        bottom: 0;
+        width: 220px;
+        height: 75px;
+        left: 16.2%;
+        background-color: yellow;
+    }
+    #div3{
+        position: absolute;
+        bottom: 0;
+        width: 220px;
+        height: 75px;
+        left: 32.4%;
+        background-color: rgb(0, 255, 200);
+    }
+    #div4{
+        position: absolute;
+        bottom: 0;
+        width: 225px;
+        height: 75px;
+        left: 48.6%;
+        background-color: violet;
+    }
+    #div5{
+        position: absolute;
+        bottom: 0;
+        width: 232px;
+        height: 75px;
+        left: 65.1%;
+        background-color: rgb(51, 255, 0);
+    }
+    #div6{
+        position: absolute;
+        bottom: 0;
+        width: 225px;
+        height: 75px;
+        left:82.2%;
+        background-color: purple;
+    }
+ #drum1{
+     position: absolute;
+     width: 160px;
+     left:32%;
+     top: 35%;
+     height: 130px;
+     transform: rotate(-20deg);
+     border-top: 15px solid black;
+     background-color: rgb(243, 243, 68);
+ }
+ #drum2{
+     position: absolute;
+     width: 160px;
+     left:52%;
+     top: 35%;
+     height: 130px;
+     border-top: 15px solid black;
+     transform: rotate(20deg);
+     background-color: rgb(243, 243, 68);
+}
+#ball{
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    border-radius: 32px;
+    left: 800px;
+    top: 180px;
+    background-color: red;
+}
+#left{
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    border-radius: 32px;
+    left: 450px;
+    top: 180px;
+    background-color: red;
+}
+#main{
+    position: absolute;
+    display: none;
+    width: 650px;
+    height: 460px;
+    border: 5px solid black;
+    background-color: white;
+    left: 25.5%;
+    top: 10%;
+    box-shadow: 50px 50px 150px 150px rgb(197, 194, 194);
+}
+#info{
+    position: absolute;
+    font-size: 30px;
+    top: 12%;
+    text-align: center;
+    font-style: italic;
+    color: rgb(11, 122, 117);
+}
+#cut{
+    position: absolute;
+    top: 2%;
+    right: 2%;
+    font-size: 40px;
+    font-style: italic;
+}
+#cut:hover{
+    cursor: pointer;
+    color: red;
+}
+    </style>
+</head>
+<body>
+    <div class="button" id="div1"></div>
+    <div class="button" id="div2"></div>
+    <div class="button" id="div3"></div>
+    <div class="button" id="div4"></div>
+    <div class="button" id="div5"></div>
+    <div class="button" id="div6"></div>
+    <p id="drum1"></p>
+    <p id="drum2"></p>
+ <div id="main">
+     <p id="info">Hey ! nice to see you !! This is simple music maker app with some animation. to use it just click on the brightly colored buttons below and hear as different sounds emerge as well as little animation ( let's keep it a surprise until you see it !!). however,  don't click on the button continously as the animation can get stuck and act weired , just give some pauses in between and you should be fine!!! Enjoy the app</p>
+      <span id="cut" onclick="remove()">x</span>   
+ </div>
+   <audio id="aud1" src="bubbles.mp3"></audio>
+   <audio id="aud2" src="clay.mp3"></audio>
+   <audio id="aud3" src="confetti.mp3"></audio>
+   <audio id="aud4" src="glimmer.mp3"></audio>
+   <audio id="aud5" src="moon.mp3"></audio>
+   <audio id="aud6" src="ufo.mp3"></audio>
+</body>
+<script>
+    let main = document.getElementById("main");
+    function remove(){
+        main.style.display = "none"
+    }
+   
+      main.style.display = "block"
+   
+    let div1 = document.getElementById("div1");
+    let div2 = document.getElementById("div2");
+    let div3 = document.getElementById("div3");
+    let div4 = document.getElementById("div4");
+    let div5 = document.getElementById("div5");
+    let div6 = document.getElementById("div6");
+    let aud1 = document.getElementById("aud1");
+    let aud2 = document.getElementById("aud2");
+    let aud3 = document.getElementById("aud3");
+    let aud4 = document.getElementById("aud4");
+    let aud5 = document.getElementById("aud5");
+    let aud6 = document.getElementById("aud6");
+    let body = document.querySelector("body");
+    let balls;
+ function createballs(){
+    balls = document.createElement("p");
+    balls.id = "ball";
+    body.appendChild(balls)
+    let Xspeed = 800;
+    let Yspeed = 180;
+    let goballs = setInterval(function(){
+        Xspeed += 5;
+        Yspeed -= 10;
+        if(Yspeed<-10){
+            clearInterval(goballs);
+            body.removeChild(balls)
+        }
+        balls.style.left = Xspeed + "px";
+        balls.style.top = Yspeed + "px";
+    }, 20)
+   
+ }
+ let leftball;
+ function createleftballs(){
+     leftball = document.createElement("p");
+     leftball.id = "left"
+     body.append(leftball);
+     let top = 180;
+     let leftgo = 450;
+     let goleft = setInterval(function(){
+         top -= 10;
+         leftgo -= 5
+         if(top<-10){
+            clearInterval(goleft);
+            body.removeChild(leftball)
+        }
+         leftball.style.top= top + "px";
+         leftball.style.left = leftgo + "px"
+     } , 20)
+ }
+ div1.addEventListener("click" , function(){
+         aud1.play();
+         createballs();
+         createleftballs()
+         balls.style.backgroundColor = "red"
+         leftball.style.backgroundColor = "red"
+    });
+    div2.addEventListener("click" , function(){
+         aud2.play();
+         createballs();
+         createleftballs()
+         balls.style.backgroundColor = "yellow"
+         leftball.style.backgroundColor = "yellow"
+    });
+    div3.addEventListener("click" , function(){
+         aud3.play();
+         createballs();
+         createleftballs()
+         balls.style.backgroundColor = "rgb(0, 255, 200)"
+         leftball.style.backgroundColor = "rgb(0, 255, 200)"
+    });
+    div4.addEventListener("click" , function(){
+         aud4.play();
+         createballs();
+         createleftballs()
+         balls.style.backgroundColor = "violet"
+         leftball.style.backgroundColor = "violet"
+    });
+    div5.addEventListener("click" , function(){
+         aud5.play();
+         createballs();
+         createleftballs()
+         balls.style.backgroundColor = "rgb(51, 255, 0)"
+         leftball.style.backgroundColor = "rgb(51, 255, 0)"
+    });
+
+    div6.addEventListener("click" , function(){
+         aud6.play();
+         createballs();
+         createleftballs();
+         balls.style.backgroundColor = "purple";
+         leftball.style.backgroundColor = "purple";
+    });
+</script>
+</html>
